@@ -56,7 +56,8 @@ public class KafkaProducerImpl<K extends Serializable, V extends SpecificRecordB
 
     private void onFailure(final String topicName, final V message, final String avroModelName, final Throwable ex) {
         log.error("Error while sending " + avroModelName +
-                " message {} to topic {}", message.toString(), topicName, ex);
+                " message {} to topic {} exception {} message {}",
+                message.toString(), topicName, ex.getStackTrace(),ex.getMessage() ,ex);
     }
 
     private void onSuccess(final K key, final SendResult<K, V> result) {

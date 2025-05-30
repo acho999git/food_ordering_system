@@ -13,6 +13,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Arrays;
+
 @Slf4j
 @Component
 public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequestMessagePublisher {
@@ -51,6 +53,8 @@ public class CreateOrderKafkaMessagePublisher implements OrderCreatedPaymentRequ
             log.info("PaymentRequestAvroModel sent to Kafka for order - OrderId: {}", orderId);
         } catch (Exception e) {
             log.error("Error sending PaymentRequestAvroModel event for order OrderId: {}", orderId);
+            log.error(e.getMessage());
+            log.error(Arrays.toString(e.getStackTrace()));
         }
 
     }

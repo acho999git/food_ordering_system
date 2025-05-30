@@ -10,6 +10,7 @@ import com.food.ordering.system.order.domain.service.service.OrderDomainService;
 import com.food.ordering.system.saga.SagaStep;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Slf4j
 @Component
@@ -28,6 +29,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse, OrderPaidEven
     }
 
     @Override
+    @Transactional
     public OrderPaidEvent process(final PaymentResponse event) {
         log.info("Order Payment completing for orderId = {}", event.getOrderId());
         final Order order = orderRepository.findById(event.getOrderId());
@@ -38,6 +40,7 @@ public class OrderPaymentSaga implements SagaStep<PaymentResponse, OrderPaidEven
     }
 
     @Override
+    @Transactional
     public EmptyEvent rollback(final PaymentResponse event) {
         log.info("Order Payment canceling for orderId = {}", event.getOrderId());
         final Order order = orderRepository.findById(event.getOrderId());

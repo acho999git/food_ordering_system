@@ -1,5 +1,6 @@
 package com.food.ordering.system.restaurant.dataaccess.entity;
 
+
 import com.food.ordering.system.order.domain.common.valueobject.OrderApprovalStatus;
 import jakarta.persistence.*;
 import lombok.*;

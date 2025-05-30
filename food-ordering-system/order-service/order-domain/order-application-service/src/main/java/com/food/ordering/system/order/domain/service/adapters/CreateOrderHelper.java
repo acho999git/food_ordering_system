@@ -52,9 +52,9 @@ public class CreateOrderHelper {
         checkCustomer(createOrderCommand.getCustomerId());
         final Restaurant restaurant = checkRestaurant(createOrderCommand);
         final Order order = mapper.toOrder(createOrderCommand);
-        saveOrder(order);
-        log.info("Created order: {}", order);
-        return this.orderDomainService.createOrder(order, restaurant, orderCreatedEventPublisher);
+        final Order orderWithId = saveOrder(order);
+        log.info("Created order: {}", orderWithId);
+        return this.orderDomainService.createOrder(orderWithId, restaurant, orderCreatedEventPublisher);
     }
 
     private Restaurant checkRestaurant(final CreateOrderCommand createOrderCommand) {
